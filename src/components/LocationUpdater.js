@@ -22,7 +22,7 @@ class LocationUpdater extends Component {
         this.interval = setInterval(() => {
             navigator.geolocation.getCurrentPosition((position) => {
                 this.setState({location: positionToArray(position)})
-            })
+            }, 1000)
         })
       }
     componentWillUnmount() {
