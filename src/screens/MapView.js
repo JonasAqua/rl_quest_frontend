@@ -3,6 +3,26 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import LocationUpdater from '../components/LocationUpdater'
 
 class MapView extends React.Component {
+  render() {
+      console.log(this.state)
+      return (
+      <Map center={[51.504425, 7.526183]} zoom={13}>
+      <TileLayer
+      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    url='https://{s}.tile.osm.org/{z}/{x}/{y}.png' />
+    <CurrentLocationMarker />
+  </Map>
+  );
+  }
+}
+
+function positionToArray(position) {
+  return [position.coords.latitude, position.coords.longitude]
+}
+
+export default MapView
+
+class CurrentLocationMarker extends React.Component {
   constructor(props) {
       super(props)
 
@@ -18,16 +38,11 @@ class MapView extends React.Component {
   render() {
       console.log(this.state)
       return (
-      <Map center={this.state.location} zoom={13}>
-      <TileLayer
-      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    url='https://{s}.tile.osm.org/{z}/{x}/{y}.png' />
     <Marker position={this.state.location}>
     <Popup>
       A pretty CSS3 popup. <br/> Easily customizable.
     </Popup>
       </Marker>
-  </Map>
   );
   }
 
@@ -42,9 +57,3 @@ class MapView extends React.Component {
   clearInterval(this.interval);
   }
 }
-
-function positionToArray(position) {
-  return [position.coords.latitude, position.coords.longitude]
-}
-
-export default MapView
