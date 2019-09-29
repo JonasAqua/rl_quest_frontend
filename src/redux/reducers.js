@@ -1,7 +1,10 @@
-import {UPDATE_MY_LOCATION} from './actionTypes'
+import {UPDATE_MY_LOCATION, UPDATE_ALL_LOCATIONS} from './actionTypes'
+import io from 'socket.io-client'
+import { statement } from '@babel/template';
 
 const initialState = {
-    location: [0, 0]
+    location: [0, 0],
+    socket: io.connect('165.227.184.33')
 }
 
 export default function(state = initialState, action) {
@@ -11,6 +14,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 location
+            }
+        case UPDATE_ALL_LOCATIONS:
+            const users = action.payload.users
+            return {
+                ...state,
+                users
             }
         default:
             return state

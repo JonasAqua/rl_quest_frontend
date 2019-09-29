@@ -1,7 +1,6 @@
 import io from 'socket.io-client'
-const socket = io('http://localhost:3500')
+const socket = io('http://165.227.184.33')
 
-socket.on('news', function (data) {
+socket.on('locationUpdate', function (data) {
     console.log(data);
-    socket.emit('my other event', { my: 'data' });
 })
